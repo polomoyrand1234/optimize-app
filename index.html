@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f2eadf" />
+  <title>Optimize — Organisation personnelle</title>
+  <link rel="icon" href="./favicon.png" />
+  <link rel="apple-touch-icon" href="./assets/icon-180.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="./css/styles.css?v=3.0.0" />
+</head>
+<body>
+  <noscript>Optimize nécessite JavaScript pour fonctionner.</noscript>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+
+  <main id="auth-screen" class="auth-shell">
+    <section class="auth-card soft-card">
+      <div class="brand-lockup">
+        <img src="./assets/icon-192.png" alt="Logo Optimize" class="brand-icon" />
+        <div>
+          <p class="eyebrow">Application personnelle</p>
+          <h1>Optimize</h1>
+          <p class="muted">Ton hub pour organiser tes journées, tes projets, tes révisions, tes objectifs et ta vie étudiante.</p>
+        </div>
+      </div>
+
+      <div class="auth-tabs" role="tablist" aria-label="Connexion ou inscription">
+        <button id="login-tab" class="tab active" type="button">Connexion</button>
+        <button id="signup-tab" class="tab" type="button">Créer un compte</button>
+      </div>
+
+      <form id="login-form" class="auth-form">
+        <label>Pseudo<input id="login-username" autocomplete="username" required placeholder="ex : polo" /></label>
+        <label>Mot de passe<input id="login-password" type="password" autocomplete="current-password" required placeholder="Ton mot de passe" /></label>
+        <button class="primary-btn" type="submit">Se connecter</button>
+      </form>
+
+      <form id="signup-form" class="auth-form hidden">
+        <label>Pseudo<input id="signup-username" autocomplete="username" required placeholder="Choisis un pseudo unique" /></label>
+        <label>Mot de passe<input id="signup-password" type="password" autocomplete="new-password" required minlength="6" placeholder="Minimum 6 caractères" /></label>
+        <label>Confirmer le mot de passe<input id="signup-password-confirm" type="password" autocomplete="new-password" required minlength="6" placeholder="Retape le mot de passe" /></label>
+        <label>Code d’invitation<input id="signup-invite" required placeholder="Code reçu" /></label>
+        <button class="primary-btn" type="submit">Créer mon compte</button>
+      </form>
+
+      <div id="storage-mode" class="notice"></div>
+    </section>
+  </main>
+
+  <div id="app-shell" class="app-shell hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-head">
+        <img src="./assets/icon-96.png" alt="" class="sidebar-logo" />
+        <div>
+          <strong>Optimize</strong>
+          <span id="sidebar-user">Espace personnel</span>
+          <span id="sidebar-xp" class="sidebar-xp">Niveau 1 · 0 XP</span>
+        </div>
+      </div>
+      <nav class="sidebar-nav" aria-label="Navigation principale">
+        <button class="nav-link active" data-page="dashboard">Accueil</button>
+        <button class="nav-link" data-page="profile">Profil</button>
+        <button class="nav-link" data-page="qg">QG</button>
+        <button class="nav-link" data-page="collection">Collection</button>
+        <button class="nav-link" data-page="cards">Cartes</button>
+        <button class="nav-link" data-page="companions">Compagnons</button>
+        <button class="nav-link" data-page="codex">Codex</button>
+        <button class="nav-link" data-page="quests">Quêtes</button>
+        <button class="nav-link" data-page="gacha">Gacha</button>
+        <button class="nav-link" data-page="shop">Boutique</button>
+        <button class="nav-link" data-page="notifications">Notifications</button>
+        <button class="nav-link" data-page="seasons">Saisons</button>
+        <button class="nav-link" data-page="day">Ma journée</button>
+        <button class="nav-link" data-page="checklist">Checklist</button>
+        <button class="nav-link" data-page="planning">Planning</button>
+        <button class="nav-link" data-page="projects">Projets</button>
+        <button class="nav-link" data-page="revisions">Révisions</button>
+        <button class="nav-link" data-page="objectives">Objectifs</button>
+        <button class="nav-link" data-page="homework">Devoirs</button>
+        <button class="nav-link" data-page="ideas">Carnet d’idées</button>
+        <button class="nav-link" data-page="budget">Budget étudiant</button>
+        <button class="nav-link" data-page="deadlines">Examens</button>
+        <button class="nav-link" data-page="courses">Suivi des cours</button>
+        <button class="nav-link" data-page="documents">Documents</button>
+        <button class="nav-link" data-page="sites">Mes sites</button>
+        <button class="nav-link" data-page="journal">Journal</button>
+        <button class="nav-link" data-page="purchases">Achats</button>
+        <button class="nav-link" data-page="skills">Compétences</button>
+        <button class="nav-link" data-page="contacts">Contacts</button>
+        <button class="nav-link" data-page="creative">Projets créatifs</button>
+        <button class="nav-link" data-page="agenda">Agenda perso</button>
+        <button class="nav-link" data-page="inventory">Inventaire</button>
+        <button class="nav-link" data-page="settings">Paramètres</button>
+      </nav>
+      <button id="logout-btn" class="ghost-btn logout" type="button">Déconnexion</button>
+    </aside>
+
+    <section class="main-panel">
+      <header class="topbar">
+        <button id="menu-toggle" class="icon-btn" type="button" aria-label="Ouvrir ou fermer le menu">☰</button>
+        <div>
+          <p class="eyebrow">Ton espace d’organisation</p>
+          <h2 id="page-title">Accueil</h2>
+        </div>
+        <div class="top-actions"><span id="today-label" class="pill"></span></div>
+      </header>
+      <div id="page-container" class="page-container"></div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/locales/fr.global.min.js"></script>
+  <script src="./js/config.js?v=3.0.0"></script>
+  <script src="./js/app.js?v=3.0.0"></script>
+</body>
+</html>
